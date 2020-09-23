@@ -9,3 +9,16 @@ before_install:
 
 script:
   - docker run -e CI=true joshkardos/docker-build npm run test
+
+deploy:
+    provider: elasticbeanstalk
+    region: "us-west-2"
+    name: "not-docker-build"
+    env: "NotDockerBuild-env"
+    bucket-name: "elasticbeanstalk-us-west-2-597067832927"
+    bucket-path: "not-docker-build"
+    on:
+        branch: master
+        
+access_key_id: $AWS_ACCESS_KEY
+secret_access_key: $AWS_SECRET_KEY
